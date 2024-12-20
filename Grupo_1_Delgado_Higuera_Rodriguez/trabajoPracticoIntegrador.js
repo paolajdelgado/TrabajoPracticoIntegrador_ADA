@@ -15,9 +15,9 @@ let libros = [
 ];
 
 let usuarios = [
-    { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: "" },
+    { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: ""},
     { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: "" },
     { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: "" },
-    { id: 4, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: "" },
-    { id: 5, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: "" }
+    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: "" },
+    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: "" }
 ];
