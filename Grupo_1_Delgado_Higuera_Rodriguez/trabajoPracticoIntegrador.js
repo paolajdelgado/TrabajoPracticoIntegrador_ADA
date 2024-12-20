@@ -22,8 +22,8 @@ let usuarios = [
     { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: [2, 5]},
     { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: [6]},
     { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: [7]},
-    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: 0 },
-    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: 9 }
+    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: [] },
+    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: [9] }
 ];
 
 console.log(usuarios);
