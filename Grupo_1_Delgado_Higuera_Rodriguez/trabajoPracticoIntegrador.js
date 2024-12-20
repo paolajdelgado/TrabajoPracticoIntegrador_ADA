@@ -22,12 +22,12 @@ let libros = [
 
 //Objeto "USUARIOS"
 let usuarios = [
-    { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: [2, 5]},
-    { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: [6]},
-    { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: [7]},
-    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: [] },
-    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: [9] }
-];
+    { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: "id: " + libros[0].id},
+    { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: "id: " + libros[4].id},
+    { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: "id: " + libros[9].id},
+    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: "id: " + libros[6].id},
+    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: "id: " + libros[2].id}
+ ];
 
 //console.log(usuarios);
 
