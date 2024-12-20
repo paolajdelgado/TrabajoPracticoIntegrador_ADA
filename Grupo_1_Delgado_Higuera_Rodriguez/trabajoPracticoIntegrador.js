@@ -26,7 +26,7 @@ let usuarios = [
     { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: [9] }
 ];
 
-console.log(usuarios);
+//console.log(usuarios);
 
 //2. Funciones de gestion de libros (CIELO)
 //a)Funcion para Agregar un nuevo libro al array LIBROS
@@ -42,9 +42,36 @@ console.log(usuarios);
 //3. Gestion de Usuarios (PAOLA)
 //a) Funcion para Agregar un nuevo usuario al array USUARIOS
 
+function registrarUsuario(nombre, email){usuarios.push({
+    id: usuarios.id + 1,
+    nombre : nombre,
+    email: email,
+    librosPrestados: []
+})} ;
+
+let nuevoUsuario = registrarUsuario("Ricardo", "ricardo.90@gmail.com");
+console.log(usuarios);
+
+//FALTA QUE COLOQUE UN NUEVO ID AUTOMATICO
+
+
 //b)Funcion para Devuelva array completo de usuarios
 
+//const mostrarTodosLosUsuarios = usuarios.filter(usuarios => usuarios.nombre);
+//let mostrarTodosLosUsuarios = [];
+
+// for(let i = 0; i < usuarios.length; i++){
+//     console.log(usuarios.id);
+//     //mostrarTodosLosUsuarios = mostrarTodosLosUsuarios + usuarios.nombre[i];
+// }
+//console.log(mostrarTodosLosUsuarios);
+
+
+
+
 //c)Funcion para Devuelva información de un usuario dado su email
+
+
 
 //d)Funcion para Eliminar un usuario seleccionado
 
