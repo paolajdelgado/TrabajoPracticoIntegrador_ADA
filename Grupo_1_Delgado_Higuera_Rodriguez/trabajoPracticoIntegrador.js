@@ -1,5 +1,8 @@
 
 //Trabajo Practico Integrador
+// Objetivo
+// Desarrollar un sistema de gestión para una biblioteca que permita administrar libros y usuarios, aplicando los conceptos fundamentales
+// de JavaScript vistos en el modulo
 
 //1. Estructura de datos
 
@@ -31,8 +34,35 @@ let usuarios = [
 //2. Funciones de gestion de libros (CIELO)
 //a)Funcion para Agregar un nuevo libro al array LIBROS
 
-//b)Funcion para Buscar libros por titulo, autor, genero
+function agregarLibro(id, titulo, autor, anio, genero) {
+    libros.push({
+        id:id, 
+        titulo: titulo, 
+        autor: autor, 
+        año: anio, 
+        genero: genero, 
+        disponible: true});
+}
 
+// Ejemplo
+agregarLibro(11, "El gran Gatsby", "F. Scott Fitzgerald", 1925, "Ciencia ficción");
+// console.log(libros)
+
+//b)Funcion para Buscar libros por titulo, autor, genero
+function buscarLibros(criterio, valor) {
+    let bookFound = []; // Almacena los libros que coincidan con el criterio de busqueda
+    for(let i = 0; i < libros.length; i++) {
+        if(libros[i][criterio] && libros[i][criterio].toString().toLowerCase() === valor.toLowerCase()) {
+            bookFound.push(libros[i]);
+        }
+    }
+    return bookFound;
+}
+
+// Ejemplo
+console.log(buscarLibros("titulo", "1984")); // busqueda por titulo
+console.log(buscarLibros("autor", "Jane Austen")); // busqueda por autor
+console.log(buscarLibros("genero", "Ciencia ficción")); // busqueda por genero
 //c) Funcion para Ordenar libros por titulo o año
 
 //d) Funcion para Eliminar libro
@@ -50,7 +80,7 @@ function registrarUsuario(nombre, email){usuarios.push({
 })} ;
 
 let nuevoUsuario = registrarUsuario("Ricardo", "ricardo.90@gmail.com");
-console.log(usuarios);
+// console.log(usuarios);
 
 //FALTA QUE COLOQUE UN NUEVO ID AUTOMATICO
 
