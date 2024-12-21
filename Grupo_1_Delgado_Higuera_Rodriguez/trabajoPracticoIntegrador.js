@@ -5,7 +5,7 @@
 
 //Objeto "LIBROS"
 let libros = [
-    { id: 1, titulo: "Los juegos del hambre", autor: "Suzanne Collins" , año: 2008, genero: "Ciencia ficción", disponible: true },
+    { id: 1, titulo: "Los juegos del hambre", autor: "Suzanne Collins" , año: 2008, genero: "Ciencia ficción", disponible: false },
     { id: 2, titulo: "Orgullo y prejuicio", autor: "Jane Austen", año: 1813, genero: "Novela", disponible: false },
     { id: 3, titulo: "Introducción a los algoritmos", autor: "Thomas H. Cormen", año: 1990, genero: "Programacion", disponible: true },
     { id: 4, titulo: "Los cuatro acuerdos", autor: "Miguel Ángel Ruiz", año: 1997, genero: "Filosofía", disponible: true },
@@ -20,10 +20,10 @@ let libros = [
 //Objeto "USUARIOS"
 let usuarios = [
     { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: "id: " + libros[0].id},
-    { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: "id: " + libros[4].id},
-    { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: "id: " + libros[9].id},
+    { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: "id: " + libros[5].id},
+    { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: "id: " + libros[1].id},
     { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: "id: " + libros[6].id},
-    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: "id: " + libros[2].id}
+    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: "id: " + libros[8].id}
  ];
 
 //console.log(usuarios);
