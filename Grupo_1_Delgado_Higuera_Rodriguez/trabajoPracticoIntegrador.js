@@ -198,10 +198,9 @@ function librosConPalabrasEnTitulo(){
 };
 
 
-
 //b)Funcion para devolver esos libros y mostrarlo en la consola
 let librosNuevo = librosConPalabrasEnTitulo();
-console.log(librosNuevo);
+//console.log(librosNuevo);
 
 
 
@@ -218,15 +217,28 @@ console.log(librosNuevo);
 //8. Manejo de Cadenas (PAOLA-CINTHIA)
 //a) Funcion para :
 //Convertir todos los titulos a mayusculas
-
-
-
-//Eliminar espacios en blanco al inicio y final de los nombres de autores
 //Formatear emails de los usuarios a minusculas
+
+let libroMayusculas = libros.map(libro => {
+    return {
+        //agregar lo otros valores del objeto a nuevo array
+        ...libro,
+
+        //Convertir todos los titulos a mayusculas
+        titulo: libro.titulo.toUpperCase(),
+
+        //Eliminar espacios en blanco al inicio y final de los nombres de autores
+        autor: libro.autor.trim()
+    };
+});
+
+console.log(libroMayusculas);
+//FALTA HACERLO FUNCION 
 
 
 
 //9. Interfaz usuario por Consola (TODAS)
 //a)Funcion para mostrar menu de opciones al usuario y permita interactuar con el sistema utilizando prompt()
+
 
 //b)Menu debe incluir opciones para todas las funcionalidades anteriores. Usar estructuras de control (if - switch - ciclos // de preferencia SWITCH)
