@@ -63,7 +63,7 @@ function buscarLibros(criterio, valor) {
 // console.log(buscarLibros("autor", "Jane Austen")); // busqueda por autor
 // console.log(buscarLibros("genero", "Ciencia ficción")); // busqueda por genero
 
-//c) Funcion para Ordenar libros por titulo o año
+// //c) Funcion para Ordenar libros por titulo o año
 
 function ordenarLibros(criterio) {
     // Recorrer todo el array de libros desde el primer hasta el último elemento
@@ -92,11 +92,11 @@ function ordenarLibros(criterio) {
     return libros;
 }
 
-// const librosOrdenadosPorTitulo = ordenarLibros("titulo"); // Ordenar por título
-// console.log("Orden de libros por medio del titulo", librosOrdenadosPorTitulo);
+const librosOrdenadosPorTitulo = ordenarLibros("titulo"); // Ordenar por título
+//console.log("Orden de libros por medio del titulo", librosOrdenadosPorTitulo);
 
-// const librosOrdenadosPorAnio = ordenarLibros("año"); // Ordenar por año
-// console.log("Orden de libros por medio del año", librosOrdenadosPorAnio);
+const librosOrdenadosPorAnio = ordenarLibros("año"); // Ordenar por año
+//console.log("Orden de libros por medio del año", librosOrdenadosPorAnio);
 
 
 //d) Funcion para Eliminar libro
@@ -118,44 +118,50 @@ function eliminarLibro(id) {
     return libros;
 }
 
-// eliminarLibro(3); // Elimina el libro con id 3
-// console.log(libros);
+eliminarLibro(3); // Elimina el libro con id 3
+//console.log(libros);
+
+
 
 //3. Gestion de Usuarios (PAOLA)
 //a) Funcion para Agregar un nuevo usuario al array USUARIOS
 
-function registrarUsuario(nombre, email){usuarios.push({
-    id: usuarios.id + 1,
+function registrarUsuario(id, nombre, email){usuarios.push({
+    id: id,
     nombre : nombre,
     email: email,
     librosPrestados: []
 })} ;
 
-let nuevoUsuario = registrarUsuario("Ricardo", "ricardo.90@gmail.com");
-// console.log(usuarios);
-
-//FALTA QUE COLOQUE UN NUEVO ID AUTOMATICO
+//Ejemplo
+let nuevoUsuario = registrarUsuario(6, "Ricardo", "ricardo.90@gmail.com");
+console.log(usuarios);
 
 
 //b)Funcion para Devuelva array completo de usuarios
+let mostrarTodosLosUsuarios = [];
 
-//const mostrarTodosLosUsuarios = usuarios.filter(usuarios => usuarios.nombre);
-//let mostrarTodosLosUsuarios = [];
+for(let i = 0; i < usuarios.length; i++){
+    mostrarTodosLosUsuarios.push(usuarios[i].nombre);
+}
 
-// for(let i = 0; i < usuarios.length; i++){
-//     console.log(usuarios.id);
-//     //mostrarTodosLosUsuarios = mostrarTodosLosUsuarios + usuarios.nombre[i];
-// }
-//console.log(mostrarTodosLosUsuarios);
-
-
+console.log(mostrarTodosLosUsuarios);
 
 
 //c)Funcion para Devuelva información de un usuario dado su email
+function buscarUsuario(email) {
+    let usuario = usuarios.find(usuario => usuario.email === email);
+    return usuario;
+}
 
+// Ejemplo
+let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
+console.log(usuarioEncontrado);
 
 
 //d)Funcion para Eliminar un usuario seleccionado
+
+
 
 
 
@@ -176,6 +182,7 @@ let nuevoUsuario = registrarUsuario("Ricardo", "ricardo.90@gmail.com");
 
 //6. Identificacion avanzada de libros (PAOLA)
 //a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
+
 
 //b)Funcion para devolver esos libros y mostrarlo en la consola
 
