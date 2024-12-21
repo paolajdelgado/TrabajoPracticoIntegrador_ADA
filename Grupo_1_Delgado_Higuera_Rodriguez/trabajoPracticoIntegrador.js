@@ -1,5 +1,8 @@
 
 //Trabajo Practico Integrador
+// Objetivo
+// Desarrollar un sistema de gestión para una biblioteca que permita administrar libros y usuarios, aplicando los conceptos fundamentales
+// de JavaScript vistos en el modulo
 
 //1. Estructura de datos
 
@@ -31,13 +34,92 @@ let usuarios = [
 //2. Funciones de gestion de libros (CIELO)
 //a)Funcion para Agregar un nuevo libro al array LIBROS
 
+function agregarLibro(id, titulo, autor, anio, genero) {
+    libros.push({
+        id:id, 
+        titulo: titulo, 
+        autor: autor, 
+        año: anio, 
+        genero: genero, 
+        disponible: true});
+}
+
+// Ejemplo
+agregarLibro(11, "El gran Gatsby", "F. Scott Fitzgerald", 1925, "Ciencia ficción");
+// console.log(libros)
+
 //b)Funcion para Buscar libros por titulo, autor, genero
+function buscarLibros(criterio, valor) {
+    let bookFound = []; // Almacena los libros que coincidan con el criterio de busqueda
+    for(let i = 0; i < libros.length; i++) {
+        if(libros[i][criterio] && libros[i][criterio].toString().toLowerCase() === valor.toLowerCase()) {
+            bookFound.push(libros[i]);
+        }
+    }
+    return bookFound;
+}
+
+// console.log(buscarLibros("titulo", "1984")); // busqueda por titulo
+// console.log(buscarLibros("autor", "Jane Austen")); // busqueda por autor
+// console.log(buscarLibros("genero", "Ciencia ficción")); // busqueda por genero
 
 //c) Funcion para Ordenar libros por titulo o año
 
+function ordenarLibros(criterio) {
+    // Recorrer todo el array de libros desde el primer hasta el último elemento
+    for (let i = 0; i < libros.length; i++) {
+        // Segundo bucle para comparar los elementos adyacentes
+        for (let j = 0; j < libros.length - 1; j++) {
+            let cambioLibros = false; // Se utiliza esta variable para determinar si los libros seran cambiados por el titulo o el año
+
+            if (criterio === "titulo") {
+                // Si el criterio es el titulo se compara en la siguiente linea de codigo, utilizando toLowerCase para comparar mayusculas/minusculas
+                if (libros[j].titulo.toLowerCase() > libros[j + 1].titulo.toLowerCase()) {
+                    cambioLibros = true;
+                }
+            } else if (criterio === "año") { // Se compara los años del libro
+                if (libros[j].año > libros[j + 1].año) {
+                    cambioLibros = true;
+                }
+            }
+            if (cambioLibros) { // Si se cumple la condición se intercambian los libros actuales por los libros que esta por ordenar
+                let temp = libros[j];
+                libros[j] = libros[j + 1];
+                libros[j + 1] = temp;
+            }
+        }
+    }
+    return libros;
+}
+
+// const librosOrdenadosPorTitulo = ordenarLibros("titulo"); // Ordenar por título
+// console.log("Orden de libros por medio del titulo", librosOrdenadosPorTitulo);
+
+// const librosOrdenadosPorAnio = ordenarLibros("año"); // Ordenar por año
+// console.log("Orden de libros por medio del año", librosOrdenadosPorAnio);
+
+
 //d) Funcion para Eliminar libro
 
+function eliminarLibro(id) {
+    // Se crea un nuevo array que excluya al libro con el id especificado
+    let newBooks = libros.filter(libro => libro.id !== id);
+    // En este bucle se comprueba si el libro fue eliminado
+    if (newBooks.length === libros.length) {
+        console.log(`Libro con id ${id} no encontrado`);
+    } else {
+        console.log(`Libro con id ${id} eliminado`);
+    }
+    // Actualizar el array original
+    libros.length = 0; // Se vacía el array original
+    for (let i = 0; i < newBooks.length; i++) {
+        libros.push(newBooks[i]); // Se llena el array original con los nuevos libros
+    }
+    return libros;
+}
 
+// eliminarLibro(3); // Elimina el libro con id 3
+// console.log(libros);
 
 //3. Gestion de Usuarios (PAOLA)
 //a) Funcion para Agregar un nuevo usuario al array USUARIOS
@@ -50,7 +132,7 @@ function registrarUsuario(nombre, email){usuarios.push({
 })} ;
 
 let nuevoUsuario = registrarUsuario("Ricardo", "ricardo.90@gmail.com");
-console.log(usuarios);
+// console.log(usuarios);
 
 //FALTA QUE COLOQUE UN NUEVO ID AUTOMATICO
 
