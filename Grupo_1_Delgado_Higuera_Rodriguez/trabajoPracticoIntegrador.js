@@ -135,7 +135,7 @@ function registrarUsuario(id, nombre, email){usuarios.push({
 
 //Ejemplo
 let nuevoUsuario = registrarUsuario(6, "Ricardo", "ricardo.90@gmail.com");
-console.log(usuarios);
+//console.log(usuarios);
 
 
 //b)Funcion para Devuelva array completo de usuarios
@@ -145,7 +145,7 @@ for(let i = 0; i < usuarios.length; i++){
     mostrarTodosLosUsuarios.push(usuarios[i].nombre);
 }
 
-console.log(mostrarTodosLosUsuarios);
+//console.log(mostrarTodosLosUsuarios);
 
 
 //c)Funcion para Devuelva información de un usuario dado su email
@@ -156,7 +156,7 @@ function buscarUsuario(email) {
 
 // Ejemplo
 let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
-console.log(usuarioEncontrado);
+//console.log(usuarioEncontrado);
 
 
 //d)Funcion para Eliminar un usuario seleccionado
@@ -184,7 +184,26 @@ console.log(usuarioEncontrado);
 //a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
 
 
+function librosConPalabrasEnTitulo(criterio){
+    librosMas1Palabra = []
+
+    for (let i=0; i< libros.length; i++){
+        if(libros[i].titulo.length > criterio){
+            librosMas1Palabra.push(libros[i].titulo);
+        };
+    };
+    
+    return librosMas1Palabra;
+
+};
+
+
+
 //b)Funcion para devolver esos libros y mostrarlo en la consola
+let librosNuevo = librosConPalabrasEnTitulo(1);
+console.log(librosNuevo);
+
+
 
 
 //7. Calculo Estadísticos (CIELO)
