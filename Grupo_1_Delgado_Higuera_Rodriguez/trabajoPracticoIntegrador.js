@@ -183,24 +183,24 @@ let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
 //6. Identificacion avanzada de libros (PAOLA)
 //a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
 
-
-function librosConPalabrasEnTitulo(criterio){
-    librosMas1Palabra = []
+function librosConPalabrasEnTitulo(){
+    let names = [];
 
     for (let i=0; i< libros.length; i++){
-        if(libros[i].titulo.length > criterio){
-            librosMas1Palabra.push(libros[i].titulo);
-        };
-    };
-    
-    return librosMas1Palabra;
+        let fractura = libros[i].titulo.split(" ");
+        //console.log(fractura)
+        if(fractura.length > 1){
+            names.push(libros[i].titulo);
+        }
+    }
 
+    return names;
 };
 
 
 
 //b)Funcion para devolver esos libros y mostrarlo en la consola
-let librosNuevo = librosConPalabrasEnTitulo(1);
+let librosNuevo = librosConPalabrasEnTitulo();
 console.log(librosNuevo);
 
 
@@ -218,6 +218,9 @@ console.log(librosNuevo);
 //8. Manejo de Cadenas (PAOLA-CINTHIA)
 //a) Funcion para :
 //Convertir todos los titulos a mayusculas
+
+
+
 //Eliminar espacios en blanco al inicio y final de los nombres de autores
 //Formatear emails de los usuarios a minusculas
 
