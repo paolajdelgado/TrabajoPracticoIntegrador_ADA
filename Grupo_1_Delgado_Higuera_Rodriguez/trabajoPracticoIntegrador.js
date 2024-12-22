@@ -353,6 +353,50 @@ function normalizarDatos(libros, usuarios) {
 
 //9. Interfaz usuario por Consola (TODAS)
 //a)Funcion para mostrar menu de opciones al usuario y permita interactuar con el sistema utilizando prompt()
-
+const prompt = require('prompt-sync')(); 
+//Declaramos la función
+function menuPrincipal() {
+    let opcion;
+  //Utilizamos ciclo Do While para crear el bucle
+    do {
+      opcion = prompt("Menú Principal\n\n" +
+        "1. Prestar libro\n" +
+        "2. Devolver libro\n" +
+        "3. Ver lista de libros\n" +
+        "4. Ver lista de usuarios\n" +
+        "5. Salir\n\n" +
+        "Ingrese su opción:");
 
 //b)Menu debe incluir opciones para todas las funcionalidades anteriores. Usar estructuras de control (if - switch - ciclos // de preferencia SWITCH)
+    //PENDIENTE REVISAR CASE 1 Y 2 SU FUNCIONABILIDAD
+    switch (opcion) {
+    case "1":
+      let idLibro = prompt("Ingrese el ID del libro:");
+      let idUsuario = prompt("Ingrese el ID del usuario:");
+      prestarLibro(idLibro, idUsuario);
+      break;
+    case "2":
+      let idLibroDevolver = prompt("Ingrese el ID del libro:");
+      let idUsuarioDevolver = prompt("Ingrese el ID del usuario:");
+      devolverLibro(idLibroDevolver, idUsuarioDevolver);
+      break;
+    case "3":
+      console.log("Lista de libros:");
+      console.log(libros);
+      break;
+    case "4":
+      console.log("Lista de usuarios:");
+      console.log(usuarios);
+      break;
+    case "5":
+      console.log("Saliendo del sistema");
+      break;
+    default:
+      console.log("Opción inválida. Por favor, intente de nuevo.");
+  }
+//Cierra el cliclo Do While
+} while (opcion !== "5");
+}
+
+//LLamamos a la función
+menuPrincipal()
