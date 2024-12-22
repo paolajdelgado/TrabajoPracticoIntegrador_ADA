@@ -12,21 +12,21 @@ let libros = [
     { id: 2, titulo: "Orgullo y prejuicio", autor: "Jane Austen", año: 1813, genero: "Novela", disponible: false },
     { id: 3, titulo: "Introducción a los algoritmos", autor: "Thomas H. Cormen", año: 1990, genero: "Programación", disponible: true },
     { id: 4, titulo: "Los cuatro acuerdos", autor: "Miguel Ángel Ruiz", año: 1997, genero: "Filosofía", disponible: true },
-    { id: 5, titulo: "Emociones que matan: La conexión entre sus emociones y su salud", autor: "Dr. Colbert", año: 2006, genero: "Autoayuda", disponible: false},
+    { id: 5, titulo: "Emociones que matan: La conexión entre sus emociones y su salud", autor: "Dr. Colbert", año: 2006, genero: "Autoayuda", disponible: true},
     { id: 6, titulo: "La maestría del amor", autor: "Miguel Ángel Ruiz", año: 1999, genero: "Filosofía", disponible: false },
     { id: 7, titulo: "La biblioteca de la medianoche", autor: "Matt Haig", año: 2020, genero: "Fantasía", disponible: false },
     { id: 8, titulo: "Hábitos atómicos", autor: "James Clear", año: 2018, genero: "Autoayuda", disponible: true },
     { id: 9, titulo: "1984", autor: "George Orwell", año: 1949, genero: "Ciencia ficción", disponible: false },
-    { id: 10, titulo: "Guía de campo de los tiburones del mundo", autor: "Leonard Compagno", año: 2006, genero: "Biología", disponible: true }
+    { id: 10, titulo: "Guía de campo de los tiburones del mundo", autor: " Leonard Compagno ", año: 2006, genero: "Biología", disponible: true }
 ];
 
 //Objeto "USUARIOS"
 let usuarios = [
-    { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: [libros[0].id]},
+    { id: 1, nombre: "Emma", email: "Emma07@mail.com", librosPrestados: [libros[0].id]},
     { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: [libros[5].id]},
-    { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: [libros[1].id]},
-    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: [libros[6].id]},
-    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: [libros[8].id]}
+    { id: 3, nombre: "Esteban", email: "Este_bandido70@mail.com", librosPrestados: [libros[1].id]},
+    { id: 4, nombre: "Ramon", email: "Ramon_estrada@mail.com", librosPrestados: [libros[6].id]},
+    { id: 5, nombre: "Bernardita", email: "Profe_bernie10@mail.com", librosPrestados: [libros[8].id]}
  ];
 
 //console.log(usuarios);
@@ -174,31 +174,54 @@ let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
 
 //5. Reportes (CINTHIA)
 //a) Funcion para genera reportes sobre:
+function generarReporteLibros(libros) {
+    // Cantidad total de libros
+    const totalLibros = libros.length;
+  
+    // Cantidad de libros prestados
+    const totalPrestados = libros.filter(libro => !libro.disponible).length;
+  
+    // Cantidad de libros por género
+    const librosPorGenero = libros.reduce((acum, libro) => {
+      if (!acum[libro.genero]) {
+        acum[libro.genero] = 1;
+      } else {
+        acum[libro.genero]++;
+      }
+      return acum;
+    }, {});
+  
+    // Libro más antiguo
+    const libroMasAntiguo = libros.reduce((antiguo, nuevo) => antiguo.año < nuevo.año ? antiguo : nuevo);
+  
+    // Libro más nuevo
+    const libroMasNuevo = libros.reduce((antiguo, nuevo) => antiguo.año > nuevo.año ? antiguo : nuevo);
 
-//Cantidad total de libros
-const totalLibros = libros.reduce((acumulador, libro) => acumulador + 1, 0);
-//console.log("La cantidad total de libros es:", totalLibros);
+    //Generamos el reporte
+    const reporte = {
+        totalLibros,
+        totalPrestados,
+        librosPorGenero,
+        libroMasAntiguo,
+        libroMasNuevo
+      };
+    
+      return reporte;
+    }
+    
+    // Llamar a la función 
+    const reporte = generarReporteLibros(libros);
+    
+    // Se imprimen resultados
+//console.log("\nEl total de los libros es: ", reporte.totalLibros);
 
-//Cantidad de libros prestados
-let totalLibrosPrestados = 0;
-usuarios.forEach(usuario => {
-  totalLibrosPrestados += usuario.librosPrestados.length;
-});
-//console.log("El total de libros prestados es: ", totalLibrosPrestados);
+//console.log("\nEl total de los libros prestados es: ", reporte.totalPrestados);
 
-//Cantidad de libros por genero
-const librosPorGenero = {};
-libros.forEach(libro => {
-    if (!librosPorGenero[libro.genero]){
-        librosPorGenero[libro.genero] = 1;
-    }else{
-        librosPorGenero[libro.genero]++;
-    }  
-});
-//console.log("\nLa cantidad de libros por género es:\n", librosPorGenero);
+//console.log("\nLa cantidad de libros por género es:\n", reporte.librosPorGenero);
 
-//Libro mas antigua y mas nuevo
+//console.log("\nEl el libro más antiguo es:\n ", reporte.libroMasAntiguo);
 
+//console.log("\nEl el libro más nuevo es:\n ", reporte.libroMasNuevo);
 
 //6. Identificacion avanzada de libros (PAOLA)
 //a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
@@ -236,25 +259,31 @@ let librosNuevo = librosConPalabrasEnTitulo();
 
 //8. Manejo de Cadenas (PAOLA-CINTHIA)
 //a) Funcion para :
-//Convertir todos los titulos a mayusculas
-//Formatear emails de los usuarios a minusculas
+function normalizarDatos(libros, usuarios) {
 
-let libroMayusculas = libros.map(libro => {
-    return {
-        //agregar lo otros valores del objeto a nuevo array
-        ...libro,
+//Convertir todos los títulos a mayúsculas.
+    libros.forEach(libro => {
+      libro.titulo = libro.titulo.toUpperCase();
+    });
+  
+ // Eliminar espacios en blanco al inicio y al final de los nombres de los autores
+    libros.forEach(libro => {
+      libro.autor = libro.autor.trim();
+    });
+  
+ // Formatear emails de los usuarios a minúsculas
+    usuarios.forEach(usuario => {
+      usuario.email = usuario.email.toLowerCase();
+    });
+  };
+  
+// Llamar a la función con los datos
+  normalizarDatos(libros, usuarios);
 
-        //Convertir todos los titulos a mayusculas
-        titulo: libro.titulo.toUpperCase(),
+//Imprimiendo en consola el resultado
+console.log("\nSe cambiaron los títulos a mayúsculas, se eliminaron espacios en blanco al inicio y al final del nombre de los autores\n", libros);
 
-        //Eliminar espacios en blanco al inicio y final de los nombres de autores
-        autor: libro.autor.trim()
-    };
-});
-
-//console.log(libroMayusculas);
-//FALTA HACERLO FUNCION 
-
+console.log("\nSe cambiaron los correos a minúsculas\n", usuarios);
 
 
 //9. Interfaz usuario por Consola (TODAS)
