@@ -10,11 +10,11 @@
 let libros = [
     { id: 1, titulo: "Los juegos del hambre", autor: "Suzanne Collins" , año: 2008, genero: "Ciencia ficción", disponible: false },
     { id: 2, titulo: "Orgullo y prejuicio", autor: "Jane Austen", año: 1813, genero: "Novela", disponible: false },
-    { id: 3, titulo: "Introducción a los algoritmos", autor: "Thomas H. Cormen", año: 1990, genero: "Programacion", disponible: true },
+    { id: 3, titulo: "Introducción a los algoritmos", autor: "Thomas H. Cormen", año: 1990, genero: "Programación", disponible: true },
     { id: 4, titulo: "Los cuatro acuerdos", autor: "Miguel Ángel Ruiz", año: 1997, genero: "Filosofía", disponible: true },
     { id: 5, titulo: "Emociones que matan: La conexión entre sus emociones y su salud", autor: "Dr. Colbert", año: 2006, genero: "Autoayuda", disponible: false},
     { id: 6, titulo: "La maestría del amor", autor: "Miguel Ángel Ruiz", año: 1999, genero: "Filosofía", disponible: false },
-    { id: 7, titulo: "La biblioteca de la medianoche", autor: "Matt Haig", año: 2020, genero: "", disponible: false },
+    { id: 7, titulo: "La biblioteca de la medianoche", autor: "Matt Haig", año: 2020, genero: "Fantasía", disponible: false },
     { id: 8, titulo: "Hábitos atómicos", autor: "James Clear", año: 2018, genero: "Autoayuda", disponible: true },
     { id: 9, titulo: "1984", autor: "George Orwell", año: 1949, genero: "Ciencia ficción", disponible: false },
     { id: 10, titulo: "Guía de campo de los tiburones del mundo", autor: "Leonard Compagno", año: 2006, genero: "Biología", disponible: true }
@@ -22,11 +22,11 @@ let libros = [
 
 //Objeto "USUARIOS"
 let usuarios = [
-    { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: "id: " + libros[0].id},
-    { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: "id: " + libros[5].id},
-    { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: "id: " + libros[1].id},
-    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: "id: " + libros[6].id},
-    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: "id: " + libros[8].id}
+    { id: 1, nombre: "Emma", email: "emma07@mail.com", librosPrestados: [libros[0].id]},
+    { id: 2, nombre: "Blanca", email: "Blanca04@mail.com", librosPrestados: [libros[5].id]},
+    { id: 3, nombre: "Esteban", email: "este_bandido70@mail.com", librosPrestados: [libros[1].id]},
+    { id: 4, nombre: "Ramon", email: "ramon_estrada@mail.com", librosPrestados: [libros[6].id]},
+    { id: 5, nombre: "Bernardita", email: "profe_bernie10@mail.com", librosPrestados: [libros[8].id]}
  ];
 
 //console.log(usuarios);
@@ -108,7 +108,7 @@ function eliminarLibro(id) {
     if (newBooks.length === libros.length) {
         console.log(`Libro con id ${id} no encontrado`);
     } else {
-        console.log(`Libro con id ${id} eliminado`);
+   //     console.log(`Libro con id ${id} eliminado`);
     }
     // Actualizar el array original
     libros.length = 0; // Se vacía el array original
@@ -174,9 +174,29 @@ let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
 
 //5. Reportes (CINTHIA)
 //a) Funcion para genera reportes sobre:
+
 //Cantidad total de libros
+const totalLibros = libros.reduce((acumulador, libro) => acumulador + 1, 0);
+//console.log("La cantidad total de libros es:", totalLibros);
+
 //Cantidad de libros prestados
+let totalLibrosPrestados = 0;
+usuarios.forEach(usuario => {
+  totalLibrosPrestados += usuario.librosPrestados.length;
+});
+//console.log("El total de libros prestados es: ", totalLibrosPrestados);
+
 //Cantidad de libros por genero
+const librosPorGenero = {};
+libros.forEach(libro => {
+    if (!librosPorGenero[libro.genero]){
+        librosPorGenero[libro.genero] = 1;
+    }else{
+        librosPorGenero[libro.genero]++;
+    }  
+});
+//console.log("\nLa cantidad de libros por género es:\n", librosPorGenero);
+
 //Libro mas antigua y mas nuevo
 
 
@@ -232,7 +252,7 @@ let libroMayusculas = libros.map(libro => {
     };
 });
 
-console.log(libroMayusculas);
+//console.log(libroMayusculas);
 //FALTA HACERLO FUNCION 
 
 
