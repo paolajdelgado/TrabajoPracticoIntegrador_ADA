@@ -167,9 +167,75 @@ let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
 
 //4. Sistema de Préstamos (CINTHIA)
 //a)Funcion para marcar libro disponible y agregar a lista de libros prestados del usuario
+function prestarLibro(idLibro, idUsuario) {
+
+    // Buscamos el libro con el ID proporcionado
+    const libro = libros.find(libro => (libro.id) === idLibro);
+
+    // Buscamos el usuario con el ID proporcionado
+    const usuario = usuarios.find(usuario => (usuario.id) === idUsuario);
+  
+    // Verificamos si el libro existe 
+    if (!libro) {
+    console.log("El libro buscado no existe");
+    return;
+     }
+
+    //Verificamos si el usuario existe
+    if (!usuario) {
+    console.log("El usuario buscado no existe");
+    return;
+    }
+
+    // Verificamos si el libro esta disponible
+    if (!libro.disponible) {
+    console.log ("El libro buscado no está disponible");
+    return;
+    }
+
+    // Marcamos el libro prestado como no disponible y se agrega a la propiedad de librosPrestados del usuario
+    libro.disponible = false;
+    usuario.librosPrestados.push((libro.id));
+    ;}
+
+    //Llamamos a la función (En este caso elegimos el libro id:10 y el usuario id:4)
+    prestarLibro(10,4);
+
+    //Se imprime el resultado
+    //console.log("\nSe actualizan los listados después de verificar el prestamo del nuevo libro al usuario\n");
+    //console.log("\nLa lista actual de los usuarios en relación a libros prestados es:\n", usuarios);
+    //console.log("\nLa disponibilidad de los libros actual es:\n", libros);
 
 //b) Funcion para marcar libro disponible y lo elimine de la lista de libros prestados
+function devolverLibro(idLibro, idUsuario) {
 
+    //Buscamos el libro
+    const libro = libros.find(libro => (libro.id) === idLibro);
+
+    //Buscamos el usuario
+    const usuario = usuarios.find(usuario => (usuario.id) === idUsuario);
+  
+    //Verificamos si el libro esta prestado al usuario
+    const indice = usuario.librosPrestados.indexOf((libro.id));
+    if (indice === -1) {
+      console.log("El libro buscado no está prestado para este usuario");
+      return;
+    }
+  
+    //Eliminamos el libro de librosPrestados
+    usuario.librosPrestados.splice(indice, 1);
+
+    //Marcamos el libro como disponible
+    libro.disponible = true;
+      };
+    
+      //Llamamos a la función (En este caso elegimos el libro id:7 y el usuario id:4)
+     devolverLibro(7, 4) 
+
+//Mostramos en consola las actualizaciones de los arrays    
+//console.log("\nSe actualizan los listados después de verificar el retorno del libro prestado al usuario\n");
+//console.log("\nEstado actual de prestamos a los usuarios:\n", usuarios);
+//console.log("\nDisponibilidad actual de los libros:\n", libros);
 
 
 //5. Reportes (CINTHIA)
@@ -281,9 +347,8 @@ function normalizarDatos(libros, usuarios) {
   normalizarDatos(libros, usuarios);
 
 //Imprimiendo en consola el resultado
-console.log("\nSe cambiaron los títulos a mayúsculas, se eliminaron espacios en blanco al inicio y al final del nombre de los autores\n", libros);
-
-console.log("\nSe cambiaron los correos a minúsculas\n", usuarios);
+//console.log("\nSe cambiaron los títulos a mayúsculas, se eliminaron espacios en blanco al inicio y al final del nombre de los autores\n", libros);
+//console.log("\nSe cambiaron los correos a minúsculas\n", usuarios);
 
 
 //9. Interfaz usuario por Consola (TODAS)
