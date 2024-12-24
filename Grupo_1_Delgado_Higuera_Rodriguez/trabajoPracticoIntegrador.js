@@ -146,7 +146,8 @@ function registrarUsuario(nombre, email){
 })} ;
 
 //Ejemplo
-registrarUsuario("Ricardo", "ricardo.90@mail.com");
+registrarUsuario("Ricardo", "Ricardo.90@mail.com");
+//console.log("Base de datos actualizada. Los usuarios de esta biblioteca son los siguientes: ");
 //console.log(usuarios);
 
 
@@ -159,17 +160,18 @@ for(let i = 0; i < usuarios.length; i++){
     mostrarTodosLosUsuarios.push(usuarios[i].nombre);
 }
 
-//console.log(mostrarTodosLosUsuarios);
+//console.log("Los usuarios registrados en la biblioteca son: " + mostrarTodosLosUsuarios);
 
 
 //c)Función que Devuelva información de un usuario dado su email
 function buscarUsuario(email) {
-    let usuario = usuarios.find(usuario => usuario.email === email);
-    return usuario;
+  let usuario = usuarios.find(usuario => usuario.email === email);
+  return usuario;
 }
 
 // Ejemplo
-let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
+let usuarioEncontrado = buscarUsuario("Profe_bernie10@mail.com");
+//console.log("La información del usuario con el email -Profe_bernie10@mail.com- es la siguiente: ");
 //console.log(usuarioEncontrado);
 
 
@@ -361,7 +363,7 @@ function librosConPalabrasEnTitulo(){
 
 //b)Función para devolver esos libros y mostrarlo en la consola
 let librosNuevo = librosConPalabrasEnTitulo();
-//console.log(librosNuevo);
+//console.log("Los libros con más de 1 palabra que se encuentran registrados en la biblioteca son: " + librosNuevo);
 
 
 
