@@ -366,11 +366,13 @@ let librosNuevo = librosConPalabrasEnTitulo();
 
 
 
-//7. Calculo Estadísticos 
-//a) Funcion para calcular
-//Promedio de años de publicacion de los libros
+// 7. Calculo Estadísticos 
+// a) Funcion para calcular
+// Promedio de años de publicacion de los libros
 function calcularPromedioAnios(libros) {
+  // Sumar todos los años de publicación
   const totalAnios = libros.reduce((sum, libro) => sum + libro.año, 0);
+  // Calcular el promedio
   return totalAnios / libros.length;
 }
 
@@ -382,14 +384,17 @@ function anioMasFrecuente(libros) {
   libros.forEach(libro => {
     const anio = libro.año;
     if (frecuencias[anio]) {
+      // Si el año ya esta en el objeto de frecuencias, se incrementa el contador
       frecuencias[anio]++;
     } else {
+      // Si el año no esta en el objeto de frecuencias, se incializa el contador
       frecuencias[anio] = 1;
     }
   });
 
   // Encontrar el año con la mayor frecuencia usando Object.entries y reduce
   const [anioFrecuente] = Object.entries(frecuencias).reduce((max, [anio, frecuencia]) => {
+    // En esta parte se compara la frecuencia actual con la mayor frecuencia encontrada hasta el momento
     return frecuencia > max[1] ? [anio, frecuencia] : max;
   }, [null, 0]);
 
@@ -403,7 +408,7 @@ function diferenciaEnAnios(libros) {
   }
   let anioMin = libros[0].año;
   let anioMax = libros[0].año;
-
+  // Recorre todos los libros hasta encontrar el año máximo y mínimo
   libros.forEach(libro => {
     if (libro.año < anioMin) {
       anioMin = libro.año;
@@ -417,8 +422,11 @@ function diferenciaEnAnios(libros) {
 
 // Función para calcular y mostrar las estadísticas
 function calcularEstadisticas(libros) {
+  // Variable para guardar el promedio de los años de publicacion
   const promedio = calcularPromedioAnios(libros);
+  // Variable para guardar el año más frecuente de la publicación del libro
   const anioFrecuente = anioMasFrecuente(libros);
+  // Variable para guardar la diferencia en años entre el libro más antiguo y el más nuevo
   const diferencia = diferenciaEnAnios(libros);
   
   return {
