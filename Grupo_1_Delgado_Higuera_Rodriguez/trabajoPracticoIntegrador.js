@@ -1,6 +1,6 @@
 
 //Trabajo Practico Integrador
-// Objetivo
+// Objetivo:
 // Desarrollar un sistema de gestión para una biblioteca que permita administrar libros y usuarios, aplicando los conceptos fundamentales
 // de JavaScript vistos en el modulo
 
@@ -32,7 +32,7 @@ let usuarios = [
 
 
 //2. Funciones de gestion de libros 
-//a)Funcion para Agregar un nuevo libro al array LIBROS
+//a)Función para Agregar un nuevo libro al array LIBROS
 
 function agregarLibro(id, titulo, autor, anio, genero) {
     libros.push({
@@ -48,7 +48,7 @@ function agregarLibro(id, titulo, autor, anio, genero) {
 agregarLibro(11, "El gran Gatsby", "F. Scott Fitzgerald", 1925, "Ciencia ficción");
 // console.log(libros)
 
-//b)Funcion para Buscar libros por titulo, autor, genero
+//b)Función para Buscar libros por título, autor, género
 function buscarLibros(criterio, valor) {
     let bookFound = []; // Almacena los libros que coincidan con el criterio de busqueda
     for(let i = 0; i < libros.length; i++) {
@@ -59,21 +59,21 @@ function buscarLibros(criterio, valor) {
     return bookFound;
 }
 
-// console.log(buscarLibros("titulo", "1984")); // busqueda por titulo
+// console.log(buscarLibros("titulo", "1984")); // busqueda por título
 // console.log(buscarLibros("autor", "Jane Austen")); // busqueda por autor
-// console.log(buscarLibros("genero", "Ciencia ficción")); // busqueda por genero
+// console.log(buscarLibros("genero", "Ciencia ficción")); // busqueda por género
 
-// //c) Funcion para Ordenar libros por titulo o año
+// //c) Función para Ordenar libros por título o año
 
 function ordenarLibros(criterio) {
     // Recorrer todo el array de libros desde el primer hasta el último elemento
     for (let i = 0; i < libros.length; i++) {
         // Segundo bucle para comparar los elementos adyacentes
         for (let j = 0; j < libros.length - 1; j++) {
-            let cambioLibros = false; // Se utiliza esta variable para determinar si los libros seran cambiados por el titulo o el año
+            let cambioLibros = false; // Se utiliza esta variable para determinar si los libros seran cambiados por el título o el año
 
             if (criterio === "titulo") {
-                // Si el criterio es el titulo se compara en la siguiente linea de codigo, utilizando toLowerCase para comparar mayusculas/minusculas
+                // Si el criterio es el título se compara en la siguiente linea de codigo, utilizando toLowerCase para comparar mayúsculas/minúsculas
                 if (libros[j].titulo.toLowerCase() > libros[j + 1].titulo.toLowerCase()) {
                     cambioLibros = true;
                 }
@@ -82,7 +82,7 @@ function ordenarLibros(criterio) {
                     cambioLibros = true;
                 }
             }
-            if (cambioLibros) { // Si se cumple la condición se intercambian los libros actuales por los libros que esta por ordenar
+            if (cambioLibros) { // Si se cumple la condición se intercambian los libros actuales por los libros que está por ordenar
                 let temp = libros[j];
                 libros[j] = libros[j + 1];
                 libros[j + 1] = temp;
@@ -99,7 +99,7 @@ const librosOrdenadosPorAnio = ordenarLibros("año"); // Ordenar por año
 //console.log("Orden de libros por medio del año", librosOrdenadosPorAnio);
 
 
-//d) Funcion para Eliminar libro
+//d) Función para Eliminar libro
 function eliminarLibro(id) {
     // Se crea un nuevo array que excluya al libro con el id especificado
     let newBooks = libros.filter(libro => libro.id !== id);
@@ -122,18 +122,18 @@ eliminarLibro(3); // Elimina el libro con id 3
 
 
 
-//3. Gestion de Usuarios 
-//a) Funcion para Agregar un nuevo usuario al array USUARIOS
+//3. Gestión de Usuarios 
+//a) Función para Agregar un nuevo usuario al array USUARIOS
 function registrarUsuario(nombre, email){
-  //Crear contador para comparar el numero maximo del ID
+  //Crear contador para comparar el número máximo del ID
   let maxID = 0
 
-  //Iterar sobre todos los numeros de ID disponibles en el catalogo de usuario
+  //Iterar sobre todos los números de ID disponibles en el catalogo de usuario
   for (let i=0; i< usuarios.length; i++) {
 
-    //Encontrar el numero maximo de ID comparando en cada iteracion
+    //Encontrar el número máximo de ID comparando en cada iteracion
       if (usuarios[i].id > maxID) {
-        //Guardar el numero mas grande de usuario ID
+        //Guardar el número más grande de usuario ID
           maxID = usuarios[i].id;
       }
   }
@@ -146,12 +146,12 @@ function registrarUsuario(nombre, email){
 })} ;
 
 //Ejemplo
-registrarUsuario("Ricardo", "ricardo.90@gmail.com");
+registrarUsuario("Ricardo", "ricardo.90@mail.com");
 //console.log(usuarios);
 
 
-//b)Funcion para Devuelva array completo de usuarios
-//Array vacio para resguardar solo los nombres de los usuarios
+//b)Función que Devuelva array completo de usuarios
+//Array vacío para resguardar solo los nombres de los usuarios
 let mostrarTodosLosUsuarios = [];
 
 //Bucle para agregar solo los nombres de los usuarios a un array nuevo
@@ -162,7 +162,7 @@ for(let i = 0; i < usuarios.length; i++){
 //console.log(mostrarTodosLosUsuarios);
 
 
-//c)Funcion para Devuelva información de un usuario dado su email
+//c)Función que Devuelva información de un usuario dado su email
 function buscarUsuario(email) {
     let usuario = usuarios.find(usuario => usuario.email === email);
     return usuario;
@@ -173,7 +173,7 @@ let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
 //console.log(usuarioEncontrado);
 
 
-//d)Funcion para Eliminar un usuario seleccionado
+//d)Función para Eliminar un usuario seleccionado
 function borrarUsuario(nombre, email) {
   // Se crea un nuevo array que excluya al usuario con el nombre y email correspondiente
   let nameUsers = usuarios.filter(usuario => usuario.nombre !== nombre);
@@ -200,7 +200,7 @@ function borrarUsuario(nombre, email) {
 
 
 //4. Sistema de Préstamos
-//a)Funcion para marcar libro disponible y agregar a lista de libros prestados del usuario
+//a)Función para marcar libro disponible y agregar a lista de libros prestados del usuario
 function prestarLibro(idLibro, idUsuario) {
 
     // Buscamos el libro con el ID proporcionado
@@ -221,7 +221,7 @@ function prestarLibro(idLibro, idUsuario) {
       return;
     }
 
-    // Verificamos si el libro esta disponible
+    // Verificamos si el libro está disponible
     if (!libro.disponible) {
       console.log (`El libro "${libro.titulo}" ya está prestado a otro usuario.`);
       return;
@@ -278,7 +278,7 @@ function devolverLibro(idLibro, idUsuario) {
 
 
 //5. Reportes 
-//a) Funcion para genera reportes sobre:
+//a) Función para genera reportes sobre:
 function generarReporteLibros(libros) {
     // Cantidad total de libros
     const totalLibros = libros.length;
@@ -331,25 +331,25 @@ function generarReporteLibros(libros) {
 
 
 
-//6. Identificacion avanzada de libros 
-//a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
+//6. Identificación avanzada de libros 
+//a) Función para identificar y mostrar libros que contienen más de 1 palabra
 function librosConPalabrasEnTitulo(){
-  //Array vacio que va a contener los nombres que cumplan con la condicion
+  //Array vacío que va a contener los nombres que cumplan con la condición
   let names = [];
 
-    //Bucle for para identificar iterar entre los libros 
+    //Bucle for para iterar entre los libros 
   for (let i=0; i< libros.length; i++){
 
-    //Expresion regular para indicarle que solo contemple los nombres que contengan letras. 
-    //Sin considerar numeros ni otros caracteres
+    //Expresión regular para indicarle que solo contemple los nombres que contengan letras. 
+    //Sin considerar números ni otros caracteres
     if(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(libros[i].titulo)){
       
       //Dividir los nombres entre palabras separadas por un espacio
       let fractura = libros[i].titulo.split(" ");
       
-      //Si el nombre se dividio en 1 o mas palabras
+      //Si el nombre se dividió en 1 o más palabras
       if(fractura.length > 1){
-        //agregar el nombre del libro al nuevo array vacio
+        //agregar el nombre del libro que cumpla con la condición al nuevo array vacío
         names.push(libros[i].titulo);
       }
     }
@@ -359,16 +359,16 @@ function librosConPalabrasEnTitulo(){
   return names;
 };
 
-//b)Funcion para devolver esos libros y mostrarlo en la consola
+//b)Función para devolver esos libros y mostrarlo en la consola
 let librosNuevo = librosConPalabrasEnTitulo();
 //console.log(librosNuevo);
 
 
 
 
-// 7. Calculo Estadísticos 
-// a) Funcion para calcular
-// Promedio de años de publicacion de los libros
+// 7. Cálculo Estadísticos 
+// a) Función para calcular
+// Promedio de años de publicación de los libros
 function calcularPromedioAnios(libros) {
   // Sumar todos los años de publicación
   const totalAnios = libros.reduce((sum, libro) => sum + libro.año, 0);
@@ -384,10 +384,10 @@ function anioMasFrecuente(libros) {
   libros.forEach(libro => {
     const anio = libro.año;
     if (frecuencias[anio]) {
-      // Si el año ya esta en el objeto de frecuencias, se incrementa el contador
+      // Si el año ya está en el objeto de frecuencias, se incrementa el contador
       frecuencias[anio]++;
     } else {
-      // Si el año no esta en el objeto de frecuencias, se incializa el contador
+      // Si el año no está en el objeto de frecuencias, se incializa el contador
       frecuencias[anio] = 1;
     }
   });
@@ -455,7 +455,7 @@ const estadisticas = calcularEstadisticas(libros);
 
 
 //8. Manejo de Cadenas 
-//a) Funcion para :
+//a) Función para :
 function normalizarDatos(libros, usuarios) {
 
 //Convertir todos los títulos a mayúsculas.
@@ -485,7 +485,7 @@ function normalizarDatos(libros, usuarios) {
 
 
 // //9. Interfaz usuario por Consola 
-// //a)Funcion para mostrar menu de opciones al usuario y permita interactuar con el sistema utilizando prompt()
+// //a)Función para mostrar menú de opciones al usuario y permita interactuar con el sistema utilizando prompt()
 const prompt = require('prompt-sync')(); 
 // //Declaramos la función
 function menuPrincipal() {
@@ -501,7 +501,7 @@ function menuPrincipal() {
         "6. Salir\n\n" +
         "Ingrese su opción:");
 
-// b)Menu debe incluir opciones para todas las funcionalidades anteriores. Usar estructuras de control (if - switch - ciclos // de preferencia SWITCH)
+// b)El menú debe incluir opciones para todas las funcionalidades anteriores. Usar estructuras de control (if - switch - ciclos // de preferencia SWITCH)
     switch (opcion) {
     case "1":
       let idLibroPrestar = parseInt(prompt("Ingrese el ID del libro a prestar: "));
