@@ -118,14 +118,13 @@ function eliminarLibro(id) {
     return libros;
 }
 
-//eliminarLibro(3); // Elimina el libro con id 3
+eliminarLibro(3); // Elimina el libro con id 3
 //console.log(libros);
 
 
 
 //3. Gestion de Usuarios (PAOLA)
 //a) Funcion para Agregar un nuevo usuario al array USUARIOS
-
 function registrarUsuario(id, nombre, email){usuarios.push({
     id: id,
     nombre : nombre,
@@ -160,7 +159,26 @@ let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
 
 
 //d)Funcion para Eliminar un usuario seleccionado
+function borrarUsuario(nombre, email) {
+  // Se crea un nuevo array que excluya al usuario con el nombre y email correspondiente
+  let nameUsers = usuarios.filter(usuario => usuario.nombre !== nombre);
+  let emailUsers = usuarios.filter(usuario => usuario.email !== email);
+  // En este bucle se comprueba si el usuario fue eliminado
+  if (nameUsers.length === usuarios.length && emailUsers.length === usuarios.length) {
+      console.log(`Usuario con nombre ${nombre} y email ${email} no encontrado`);
+  } else {
+      console.log(`Usuario con nombre ${nombre} y email ${email} eliminado`);
+  }
+  // Actualizar el array original
+  usuarios.length = 0; // Se vacía el array original
+  for (let i = 0; i < nameUsers.length; i++) {
+      usuarios.push(nameUsers[i]); // Se actualiza el array, eliminando el usuario seleccionado
+  }
+  return usuarios;
+}
 
+borrarUsuario("Emma", "emma07@mail.com"); // Elimina el usuario con dicho nombre y email
+console.log(usuarios);
 
 
 
@@ -314,6 +332,9 @@ function librosConPalabrasEnTitulo(){
 let librosNuevo = librosConPalabrasEnTitulo();
 //console.log(librosNuevo);
 
+
+
+
 //7. Calculo Estadísticos (CIELO)
 //a) Funcion para calcular
 //Promedio de años de publicacion de los libros
@@ -385,7 +406,7 @@ function mostrarEstadisticas(estadisticas) {
 }
 
 const estadisticas = calcularEstadisticas(libros);
-mostrarEstadisticas(estadisticas);
+//mostrarEstadisticas(estadisticas);
 
 // console.log(Promedio de años de publicación: ${promedio});
 // console.log(Año de publicación más frecuente: ${anioFrecuente});
@@ -471,4 +492,4 @@ function menuPrincipal() {
 }
 
 // LLamamos a la función
-menuPrincipal()
+//menuPrincipal()
