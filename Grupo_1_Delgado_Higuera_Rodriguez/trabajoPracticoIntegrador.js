@@ -118,7 +118,7 @@ function eliminarLibro(id) {
     return libros;
 }
 
-eliminarLibro(3); // Elimina el libro con id 3
+//eliminarLibro(3); // Elimina el libro con id 3
 //console.log(libros);
 
 
@@ -170,36 +170,38 @@ let usuarioEncontrado = buscarUsuario("profe_bernie10@mail.com");
 function prestarLibro(idLibro, idUsuario) {
 
     // Buscamos el libro con el ID proporcionado
-    const libro = libros.find(libro => (libro.id) === idLibro);
+    const libro = libros.find(libro => libro.id === idLibro);
 
     // Buscamos el usuario con el ID proporcionado
-    const usuario = usuarios.find(usuario => (usuario.id) === idUsuario);
+    const usuario = usuarios.find(usuario => usuario.id === idUsuario);
   
     // Verificamos si el libro existe 
     if (!libro) {
-    console.log("El libro buscado no existe");
-    return;
-     }
+      console.log("El libro buscado no existe");
+      return;
+    }
 
     //Verificamos si el usuario existe
     if (!usuario) {
-    console.log("El usuario buscado no existe");
-    return;
+      console.log("El usuario buscado no existe");
+      return;
     }
 
     // Verificamos si el libro esta disponible
     if (!libro.disponible) {
-    console.log ("El libro buscado no está disponible");
-    return;
+      console.log (`El libro "${libro.titulo}" ya está prestado a otro usuario.`);
+      return;
     }
 
     // Marcamos el libro prestado como no disponible y se agrega a la propiedad de librosPrestados del usuario
     libro.disponible = false;
-    usuario.librosPrestados.push((libro.id));
-    ;}
+    usuario.librosPrestados.push(libro.id);
+  
+    console.log(`El libro "${libro.titulo}" ha sido prestado a ${usuario.nombre}.`);
+  }
 
     //Llamamos a la función (En este caso elegimos el libro id:10 y el usuario id:4)
-    prestarLibro(10,4);
+   //prestarLibro(10,4);
 
     //Se imprime el resultado
     //console.log("\nSe actualizan los listados después de verificar el prestamo del nuevo libro al usuario\n");
@@ -209,28 +211,29 @@ function prestarLibro(idLibro, idUsuario) {
 //b) Funcion para marcar libro disponible y lo elimine de la lista de libros prestados
 function devolverLibro(idLibro, idUsuario) {
 
-    //Buscamos el libro
-    const libro = libros.find(libro => (libro.id) === idLibro);
+  //Buscamos el libro
+  const libro = libros.find(libro => (libro.id) === idLibro);
 
-    //Buscamos el usuario
-    const usuario = usuarios.find(usuario => (usuario.id) === idUsuario);
-  
-    //Verificamos si el libro esta prestado al usuario
-    const indice = usuario.librosPrestados.indexOf((libro.id));
-    if (indice === -1) {
-      console.log("El libro buscado no está prestado para este usuario");
-      return;
-    }
-  
-    //Eliminamos el libro de librosPrestados
-    usuario.librosPrestados.splice(indice, 1);
+  //Buscamos el usuario
+  const usuario = usuarios.find(usuario => (usuario.id) === idUsuario);
 
-    //Marcamos el libro como disponible
-    libro.disponible = true;
-      };
-    
-      //Llamamos a la función (En este caso elegimos el libro id:7 y el usuario id:4)
-     devolverLibro(7, 4) 
+  //Verificamos si el libro esta prestado al usuario
+  const indice = usuario.librosPrestados.indexOf((libro.id));
+  if (indice === -1) {
+    console.log("El libro buscado no está prestado para este usuario");
+    return;
+  }
+
+  //Eliminamos el libro de librosPrestados
+  usuario.librosPrestados.splice(indice, 1);
+
+  //Marcamos el libro como disponible
+  libro.disponible = true;
+  console.log(`El usuario ${usuario.nombre} ha devuelto el libro "${libro.titulo}" (ID: ${libro.id}).`);
+    };
+  
+    //Llamamos a la función (En este caso elegimos el libro id:7 y el usuario id:4)
+   //devolverLibro(7, 4) 
 
 //Mostramos en consola las actualizaciones de los arrays    
 //console.log("\nSe actualizan los listados después de verificar el retorno del libro prestado al usuario\n");
@@ -311,16 +314,82 @@ function librosConPalabrasEnTitulo(){
 let librosNuevo = librosConPalabrasEnTitulo();
 //console.log(librosNuevo);
 
-
-
-
 //7. Calculo Estadísticos (CIELO)
 //a) Funcion para calcular
 //Promedio de años de publicacion de los libros
+function calcularPromedioAnios(libros) {
+  const totalAnios = libros.reduce((sum, libro) => sum + libro.año, 0);
+  return totalAnios / libros.length;
+}
 
-//Año de publicacion mas frecuente
+// Función para encontrar el año de publicación más frecuente
+function anioMasFrecuente(libros) {
+  const frecuencias = {};
 
-//Diferencia en años entre libro más antiguo y más nuevo
+  // Calcular las frecuencias de cada año
+  libros.forEach(libro => {
+    const anio = libro.año;
+    if (frecuencias[anio]) {
+      frecuencias[anio]++;
+    } else {
+      frecuencias[anio] = 1;
+    }
+  });
+
+  // Encontrar el año con la mayor frecuencia usando Object.entries y reduce
+  const [anioFrecuente] = Object.entries(frecuencias).reduce((max, [anio, frecuencia]) => {
+    return frecuencia > max[1] ? [anio, frecuencia] : max;
+  }, [null, 0]);
+
+  return anioFrecuente;
+}
+
+// Diferencia en años entre libro más antiguo y más nuevo
+function diferenciaEnAnios(libros) {
+  if (libros.length === 0) {
+    return 0; // Si no hay libros, la diferencia es cero
+  }
+  let anioMin = libros[0].año;
+  let anioMax = libros[0].año;
+
+  libros.forEach(libro => {
+    if (libro.año < anioMin) {
+      anioMin = libro.año;
+    }
+    if (libro.año > anioMax) {
+      anioMax = libro.año;
+    }
+  });
+  return anioMax - anioMin;
+}
+
+// Función para calcular y mostrar las estadísticas
+function calcularEstadisticas(libros) {
+  const promedio = calcularPromedioAnios(libros);
+  const anioFrecuente = anioMasFrecuente(libros);
+  const diferencia = diferenciaEnAnios(libros);
+  
+  return {
+    promedio: promedio,
+    anioFrecuente: anioFrecuente,
+    diferencia: diferencia
+  };
+}
+
+function mostrarEstadisticas(estadisticas) {
+  console.log("\n--- Estadísticas de Libros ---");
+  console.log(`Promedio de años de publicación: ${estadisticas.promedio.toFixed(2)}`);
+  console.log(`Año de publicación más frecuente: ${estadisticas.anioFrecuente}`);
+  console.log(`Diferencia en años entre el libro más antiguo y el más nuevo: ${estadisticas.diferencia}`);
+  console.log("-----------------------------\n");
+}
+
+const estadisticas = calcularEstadisticas(libros);
+mostrarEstadisticas(estadisticas);
+
+// console.log(Promedio de años de publicación: ${promedio});
+// console.log(Año de publicación más frecuente: ${anioFrecuente});
+// console.log(Diferencia en años entre el libro más antiguo y el más nuevo: ${diferencia});
 
 
 //8. Manejo de Cadenas (PAOLA-CINTHIA)
@@ -351,10 +420,10 @@ function normalizarDatos(libros, usuarios) {
 //console.log("\nSe cambiaron los correos a minúsculas\n", usuarios);
 
 
-//9. Interfaz usuario por Consola (TODAS)
-//a)Funcion para mostrar menu de opciones al usuario y permita interactuar con el sistema utilizando prompt()
+// //9. Interfaz usuario por Consola (TODAS)
+// //a)Funcion para mostrar menu de opciones al usuario y permita interactuar con el sistema utilizando prompt()
 const prompt = require('prompt-sync')(); 
-//Declaramos la función
+// //Declaramos la función
 function menuPrincipal() {
     let opcion;
   //Utilizamos ciclo Do While para crear el bucle
@@ -364,20 +433,20 @@ function menuPrincipal() {
         "2. Devolver libro\n" +
         "3. Ver lista de libros\n" +
         "4. Ver lista de usuarios\n" +
-        "5. Salir\n\n" +
+        "5. Estadísticas de los libros\n" +
+        "6. Salir\n\n" +
         "Ingrese su opción:");
 
-//b)Menu debe incluir opciones para todas las funcionalidades anteriores. Usar estructuras de control (if - switch - ciclos // de preferencia SWITCH)
-    //PENDIENTE REVISAR CASE 1 Y 2 SU FUNCIONABILIDAD
+// b)Menu debe incluir opciones para todas las funcionalidades anteriores. Usar estructuras de control (if - switch - ciclos // de preferencia SWITCH)
     switch (opcion) {
     case "1":
-      let idLibro = prompt("Ingrese el ID del libro:");
-      let idUsuario = prompt("Ingrese el ID del usuario:");
-      prestarLibro(idLibro, idUsuario);
+      let idLibroPrestar = parseInt(prompt("Ingrese el ID del libro a prestar: "));
+      let idUsuarioPrestar = parseInt(prompt("Ingrese el ID del usuario: "));
+      prestarLibro(idLibroPrestar, idUsuarioPrestar);
       break;
     case "2":
-      let idLibroDevolver = prompt("Ingrese el ID del libro:");
-      let idUsuarioDevolver = prompt("Ingrese el ID del usuario:");
+      let idLibroDevolver = parseInt(prompt("Ingrese el ID del libro a devolver: "));
+      let idUsuarioDevolver = parseInt(prompt("Ingrese el ID del usuario: "));
       devolverLibro(idLibroDevolver, idUsuarioDevolver);
       break;
     case "3":
@@ -389,14 +458,17 @@ function menuPrincipal() {
       console.log(usuarios);
       break;
     case "5":
+      console.log(mostrarEstadisticas(estadisticas));
+      break;
+    case "6":
       console.log("Saliendo del sistema");
       break;
     default:
       console.log("Opción inválida. Por favor, intente de nuevo.");
   }
 //Cierra el cliclo Do While
-} while (opcion !== "5");
+} while (opcion !== "6");
 }
 
-//LLamamos a la función
+// LLamamos a la función
 menuPrincipal()
