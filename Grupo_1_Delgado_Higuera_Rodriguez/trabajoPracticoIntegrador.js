@@ -27,11 +27,11 @@ let usuarios = [
     { id: 3, nombre: "Esteban", email: "Este_bandido70@mail.com", librosPrestados: [libros[1].id]},
     { id: 4, nombre: "Ramon", email: "Ramon_estrada@mail.com", librosPrestados: [libros[6].id]},
     { id: 5, nombre: "Bernardita", email: "Profe_bernie10@mail.com", librosPrestados: [libros[8].id]}
- ];
+];
 
-//console.log(usuarios);
 
-//2. Funciones de gestion de libros (CIELO)
+
+//2. Funciones de gestion de libros 
 //a)Funcion para Agregar un nuevo libro al array LIBROS
 
 function agregarLibro(id, titulo, autor, anio, genero) {
@@ -100,7 +100,6 @@ const librosOrdenadosPorAnio = ordenarLibros("año"); // Ordenar por año
 
 
 //d) Funcion para Eliminar libro
-
 function eliminarLibro(id) {
     // Se crea un nuevo array que excluya al libro con el id especificado
     let newBooks = libros.filter(libro => libro.id !== id);
@@ -123,7 +122,7 @@ eliminarLibro(3); // Elimina el libro con id 3
 
 
 
-//3. Gestion de Usuarios (PAOLA)
+//3. Gestion de Usuarios 
 //a) Funcion para Agregar un nuevo usuario al array USUARIOS
 function registrarUsuario(id, nombre, email){usuarios.push({
     id: id,
@@ -138,8 +137,10 @@ let nuevoUsuario = registrarUsuario(6, "Ricardo", "ricardo.90@gmail.com");
 
 
 //b)Funcion para Devuelva array completo de usuarios
+//Array vacio para resguardar solo los nombres de los usuarios
 let mostrarTodosLosUsuarios = [];
 
+//Bucle para agregar solo los nombres de los usuarios a un array nuevo
 for(let i = 0; i < usuarios.length; i++){
     mostrarTodosLosUsuarios.push(usuarios[i].nombre);
 }
@@ -177,13 +178,14 @@ function borrarUsuario(nombre, email) {
   return usuarios;
 }
 
-borrarUsuario("Emma", "emma07@mail.com"); // Elimina el usuario con dicho nombre y email
-console.log(usuarios);
+//Ejemplo
+//borrarUsuario("Emma", "emma07@mail.com"); // Elimina el usuario con dicho nombre y email
+//console.log(usuarios);
 
 
 
 
-//4. Sistema de Préstamos (CINTHIA)
+//4. Sistema de Préstamos
 //a)Funcion para marcar libro disponible y agregar a lista de libros prestados del usuario
 function prestarLibro(idLibro, idUsuario) {
 
@@ -259,7 +261,9 @@ function devolverLibro(idLibro, idUsuario) {
 //console.log("\nDisponibilidad actual de los libros:\n", libros);
 
 
-//5. Reportes (CINTHIA)
+
+
+//5. Reportes 
 //a) Funcion para genera reportes sobre:
 function generarReporteLibros(libros) {
     // Cantidad total de libros
@@ -310,16 +314,24 @@ function generarReporteLibros(libros) {
 
 //console.log("\nEl el libro más nuevo es:\n ", reporte.libroMasNuevo);
 
-//6. Identificacion avanzada de libros (PAOLA)
-//a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
 
+
+
+//6. Identificacion avanzada de libros 
+//a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
 function librosConPalabrasEnTitulo(){
+    //Array vacio para contener los nombres de los libros
     let names = [];
 
+    //bucle para ir seleccionando libro por libro
     for (let i=0; i< libros.length; i++){
+      //Desglosaar los nombres de cada libro por un espacio separador
         let fractura = libros[i].titulo.split(" ");
         //console.log(fractura)
+        
+        //Si hay un espacio o mas, quiere decir que tiene una palabra mas
         if(fractura.length > 1){
+          //Agregar libro que cumple la condicion al array vacio
             names.push(libros[i].titulo);
         }
     }
@@ -335,7 +347,7 @@ let librosNuevo = librosConPalabrasEnTitulo();
 
 
 
-//7. Calculo Estadísticos (CIELO)
+//7. Calculo Estadísticos 
 //a) Funcion para calcular
 //Promedio de años de publicacion de los libros
 function calcularPromedioAnios(libros) {
@@ -413,7 +425,9 @@ const estadisticas = calcularEstadisticas(libros);
 // console.log(Diferencia en años entre el libro más antiguo y el más nuevo: ${diferencia});
 
 
-//8. Manejo de Cadenas (PAOLA-CINTHIA)
+
+
+//8. Manejo de Cadenas 
 //a) Funcion para :
 function normalizarDatos(libros, usuarios) {
 
@@ -441,7 +455,9 @@ function normalizarDatos(libros, usuarios) {
 //console.log("\nSe cambiaron los correos a minúsculas\n", usuarios);
 
 
-// //9. Interfaz usuario por Consola (TODAS)
+
+
+// //9. Interfaz usuario por Consola 
 // //a)Funcion para mostrar menu de opciones al usuario y permita interactuar con el sistema utilizando prompt()
 const prompt = require('prompt-sync')(); 
 // //Declaramos la función
@@ -492,4 +508,4 @@ function menuPrincipal() {
 }
 
 // LLamamos a la función
-//menuPrincipal()
+menuPrincipal()
