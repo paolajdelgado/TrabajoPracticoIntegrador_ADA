@@ -124,15 +124,29 @@ eliminarLibro(3); // Elimina el libro con id 3
 
 //3. Gestion de Usuarios 
 //a) Funcion para Agregar un nuevo usuario al array USUARIOS
-function registrarUsuario(id, nombre, email){usuarios.push({
-    id: id,
-    nombre : nombre,
-    email: email,
-    librosPrestados: []
+function registrarUsuario(nombre, email){
+  //Crear contador para comparar el numero maximo del ID
+  let maxID = 0
+
+  //Iterar sobre todos los numeros de ID disponibles en el catalogo de usuario
+  for (let i=0; i< usuarios.length; i++) {
+
+    //Encontrar el numero maximo de ID comparando en cada iteracion
+      if (usuarios[i].id > maxID) {
+        //Guardar el numero mas grande de usuario ID
+          maxID = usuarios[i].id;
+      }
+  }
+  
+  usuarios.push({
+       id: maxID + 1,
+      nombre : nombre,
+      email: email,
+      librosPrestados: []
 })} ;
 
 //Ejemplo
-let nuevoUsuario = registrarUsuario(6, "Ricardo", "ricardo.90@gmail.com");
+registrarUsuario("Ricardo", "ricardo.90@gmail.com");
 //console.log(usuarios);
 
 
@@ -320,25 +334,30 @@ function generarReporteLibros(libros) {
 //6. Identificacion avanzada de libros 
 //a) Funcion para identificar y mostrar libros que contienen mas de 1 palabra
 function librosConPalabrasEnTitulo(){
-    //Array vacio para contener los nombres de los libros
-    let names = [];
+  //Array vacio que va a contener los nombres que cumplan con la condicion
+  let names = [];
 
-    //bucle para ir seleccionando libro por libro
-    for (let i=0; i< libros.length; i++){
-      //Desglosaar los nombres de cada libro por un espacio separador
-        let fractura = libros[i].titulo.split(" ");
-        //console.log(fractura)
-        
-        //Si hay un espacio o mas, quiere decir que tiene una palabra mas
-        if(fractura.length > 1){
-          //Agregar libro que cumple la condicion al array vacio
-            names.push(libros[i].titulo);
-        }
+    //Bucle for para identificar iterar entre los libros 
+  for (let i=0; i< libros.length; i++){
+
+    //Expresion regular para indicarle que solo contemple los nombres que contengan letras. 
+    //Sin considerar numeros ni otros caracteres
+    if(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(libros[i].titulo)){
+      
+      //Dividir los nombres entre palabras separadas por un espacio
+      let fractura = libros[i].titulo.split(" ");
+      
+      //Si el nombre se dividio en 1 o mas palabras
+      if(fractura.length > 1){
+        //agregar el nombre del libro al nuevo array vacio
+        names.push(libros[i].titulo);
+      }
     }
+  }
 
-    return names;
+  //mostrar los nombres que se clasificaron en el array
+  return names;
 };
-
 
 //b)Funcion para devolver esos libros y mostrarlo en la consola
 let librosNuevo = librosConPalabrasEnTitulo();
@@ -508,4 +527,4 @@ function menuPrincipal() {
 }
 
 // LLamamos a la función
-menuPrincipal()
+//menuPrincipal()
